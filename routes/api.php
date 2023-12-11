@@ -21,6 +21,7 @@ Route::post('/login', [UserController::class, 'login']);
 
 // USER WITH AUTH
 Route::middleware("auth:sanctum")->get('/profile', [UserController::class, 'profile']);
+Route::middleware("auth:sanctum")->post('/logout', [UserController::class, 'logout']);
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
