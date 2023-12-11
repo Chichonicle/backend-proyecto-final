@@ -4,6 +4,9 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -36,6 +39,24 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public function salas(): HasMany
+    {
+        return $this->hasMany(Sala::class);
+    }
+    public function series(): HasMany
+    {
+        return $this->hasMany(Serie::class);
+    }
+    public function mensajes(): HasMany
+    {
+        return $this->hasMany(Mensaje::class);
+    }
+    public function comentarios(): BelongsToMany
+    {
+        return $this->belongsToMany(sala::class, "mensajes");
+    }
+    
 
 
 }
