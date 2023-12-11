@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
@@ -48,5 +49,17 @@ class UserController extends Controller
                 Response::HTTP_INTERNAL_SERVER_ERROR
             );
         }
+    }
+
+    private function validateRegister(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            "name" => "required|min:3|max:60|string",
+            "surname" => "required|min:3|max:200|string",
+            "username" => "required|string|unique:users",
+            "email" => "required|email",
+            "password" => "required|min:8|max:80|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/",
+        ]);
+        return $validator;
     }
 }
