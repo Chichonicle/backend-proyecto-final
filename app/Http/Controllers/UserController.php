@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -61,5 +63,63 @@ class UserController extends Controller
             "password" => "required|min:8|max:80|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/",
         ]);
         return $validator;
+    }
+
+    public function login(Request $request)
+    {
+        try {
+            $validator = Validator::make(
+                $request->all(),
+                [
+                    "username" => "required|string",
+                    "password" => "required|min:8|max:80|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/",
+                ]
+            );
+            if ($validator->fails()) {
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "Error to login",
+                        "error" => $validator->errors(),
+                    ],
+                    Response::HTTP_BAD_REQUEST
+                );
+            }
+            $username = $request->input("username");
+            $password = $request->input("password");
+            $user = User::query()->where("username", $username)->first();
+
+            if (!$user || !Hash::check($password, $user->password)) {
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "Email or password are incorrect",
+                    ],
+                    Response::HTTP_UNAUTHORIZED
+                );
+            }
+
+            $token = $user->createToken("token")->plainTextToken;
+
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "User logged successfully",
+                    "token" => $token,
+                    "user" => $user,
+
+                ]
+            );
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error to login",
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
     }
 }
