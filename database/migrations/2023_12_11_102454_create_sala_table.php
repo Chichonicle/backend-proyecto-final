@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('sala', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('serie_id');
-            $table->foreign('serie_id')->references('id')->on('series');
+            $table->foreign('serie_id')->references('id')->on('serie');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamp('created_at')->useCurrent();
