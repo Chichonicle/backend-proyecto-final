@@ -43,4 +43,41 @@ class SeriesController extends Controller
             );
         }
     }
+
+    public function getSerieById(Request $request, $id)
+    {
+        try {
+            $serie = Series::query()->find($id);
+
+            if (!$serie) {
+                return response()->json(
+                    [
+                        'success' => false,
+                        'message' => "Serie doesn't exist"
+                    ],
+                    Response::HTTP_NOT_FOUND
+                );
+            }
+
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => "Serie obtained",
+                    'data' => $serie
+                ],
+                Response::HTTP_OK
+            );
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => 'Error founding serie'
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
 }
+

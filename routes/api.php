@@ -28,7 +28,7 @@ Route::middleware("auth:sanctum")->put('/update', [UserController::class, 'updat
 
 // SERIES PUBLIC
 Route::get('/series', [SeriesController::class, 'getAllSeries']);
-
+Route::get('/serie/{id}', [SeriesController::class, 'getSerieById']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
