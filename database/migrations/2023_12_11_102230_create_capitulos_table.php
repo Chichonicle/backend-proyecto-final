@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name', 100);
             $table->string('url', 200);
-            $table->unsignedBigInteger('serie_id');
-            $table->foreign('serie_id')->references('id')->on('serie');
+            $table->unsignedBigInteger('series_id');
+            $table->foreign('series_id')->references('id')->on('series');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });

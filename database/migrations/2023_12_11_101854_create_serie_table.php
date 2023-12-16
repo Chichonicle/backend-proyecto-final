@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('serie', function (Blueprint $table) {
+        Schema::create('series', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100);
             $table->string('genre', 50);
             $table->string('year', 4);
             $table->string('url', 200);
+            $table->boolean('is_active')->default(true);
             $table->string('picture', 200);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('serie');
+        Schema::dropIfExists('series');
     }
 };

@@ -6,16 +6,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
-class Serie extends Model
+class Series extends Model
 {
-    use HasFactory;
+    use HasApiTokens, HasFactory, Notifiable;
 
     protected $fillable = [
         'name',
         'genre',
         'year',
         'url',
+        'is_active',
         'picture',
     ];
 
@@ -23,9 +26,9 @@ class Serie extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function series(): BelongsTo
+    public function serie(): BelongsTo
     {
-        return $this->belongsTo(Serie::class);
+        return $this->belongsTo(Series::class);
     }
     public function salas(): HasMany
     {

@@ -1,5 +1,7 @@
 <?php
 
+
+use App\Http\Controllers\SeriesController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +25,9 @@ Route::post('/login', [UserController::class, 'login']);
 Route::middleware("auth:sanctum")->get('/profile', [UserController::class, 'profile']);
 Route::middleware("auth:sanctum")->post('/logout', [UserController::class, 'logout']);
 Route::middleware("auth:sanctum")->put('/update', [UserController::class, 'updateProfile']);
+
+// SERIES PUBLIC
+Route::get('/series', [SeriesController::class, 'getAllSeries']);
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
