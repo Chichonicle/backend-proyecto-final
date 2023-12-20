@@ -84,4 +84,53 @@ class MemberController extends Controller
             );
         }
     }
+
+    public function exitSalaById($id)
+    {
+        try {
+            $memberId = Member::query()->find($id);
+
+            if (!$memberId) {
+                return response()->json(
+                    [
+                        "success" => true,
+                        "message" => "Member not found"
+                    ],
+                    Response::HTTP_NOT_FOUND
+                );
+            }
+
+            $userId = auth()->id();
+            if ($memberId->user_id != $userId) {
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "You are not authorized to delete this member"
+                    ],
+                    Response::HTTP_UNAUTHORIZED
+                );
+            }
+            $memberDeleted = $memberId->delete();
+
+            if ($memberDeleted) {
+                return response()->json(
+                    [
+                        "success" => true,
+                        "message" => "Member deleted successfully"
+                    ],
+                    Response::HTTP_OK
+                );
+            }
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error deleting member"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
 }
