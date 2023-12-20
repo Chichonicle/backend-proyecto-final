@@ -47,4 +47,5 @@ Route::group([
     ]
 ], function () {
 Route::post('/member', [MemberController::class, 'addUserSalas']);
+Route::post('/member/add', [MemberController::class, 'addMember']);
 });
