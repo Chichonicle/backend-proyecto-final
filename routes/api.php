@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MemberController;
 use App\Http\Controllers\SeriesController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -35,3 +36,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 // MESSAGES
+
+
+
+
+//MEMBERS
+Route::group([
+    "middleware" => [
+        "auth:sanctum"
+    ]
+], function () {
+Route::post('/member', [MemberController::class, 'addUserSalas']);
+});
