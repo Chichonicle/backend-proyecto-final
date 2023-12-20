@@ -54,7 +54,7 @@ class User extends Authenticatable
     }
     public function comentarios(): BelongsToMany
     {
-        return $this->belongsToMany(sala::class, "mensajes");
+        return $this->belongsToMany(Sala::class, "mensajes");
     }
     
 

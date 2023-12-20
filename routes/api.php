@@ -1,6 +1,5 @@
 <?php
 
-
 use App\Http\Controllers\SeriesController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -33,3 +32,6 @@ Route::get('/serie/{id}', [SeriesController::class, 'getSerieById']);
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+// MESSAGES

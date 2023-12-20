@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('mensajes', function (Blueprint $table) {
+        Schema::create('members', function (Blueprint $table) {
             $table->id();
-            $table->string('message', 500);
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('salas_id');
-            $table->foreign('salas_id')->references('id')->on('salas');
+            $table->foreign("user_id")->references("id")->on("users")->constrained()->onDelete('cascade');
+            $table->foreign("salas_id")->references("id")->on("salas")->constrained()->onDelete('cascade');
+            $table->unique(["user_id", "salas_id"]);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('mensajes');
+        Schema::dropIfExists('members');
     }
 };

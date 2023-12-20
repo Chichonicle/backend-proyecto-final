@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use Laravel\Sanctum\PersonalAccessToken;
 use Symfony\Component\HttpFoundation\Response;
 
+
 class UserController extends Controller
 {
     public function register(Request $request)
@@ -205,6 +206,7 @@ class UserController extends Controller
             }
 
             $user->save();
+
 
             return response()->json(
                 [

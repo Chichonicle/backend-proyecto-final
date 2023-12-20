@@ -21,6 +21,6 @@ class Sala extends Model
     }
     public function series(): BelongsTo
     {
-        return $this->belongsTo(Serie::class, 'serie_id');
+        return $this->belongsTo(Series::class, 'serie_id');
     }
 }

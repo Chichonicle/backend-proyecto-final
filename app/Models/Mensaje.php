@@ -14,14 +14,14 @@ class Mensaje extends Model
     protected $fillable = [
         'message',
         'user_id',
-        'sala_id',
+        'salas_id',
     ];
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
-    public function salas(): HasMany
+    public function sala(): HasMany
     {
         return $this->hasMany(Sala::class);
     }
