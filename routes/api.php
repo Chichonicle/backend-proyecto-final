@@ -71,4 +71,5 @@ Route::group([
     'middleware' => ['auth:sanctum', 'admin']
 ], function () {
     Route::post('/serie', [adminController::class, 'createSerie']);
+    Route::delete('/serie/{id}', [adminController::class, 'deleteSerie']);
 });
