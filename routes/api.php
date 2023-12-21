@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\SeriesController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -36,9 +37,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 // MESSAGES
-
-
-
+Route::group([
+    "middleware" => [
+        "auth:sanctum"
+    ]
+], function () {
+    Route::post('/createMessage', [MessageController::class, 'createMessage']);
+});
 
 //MEMBERS
 Route::group([
