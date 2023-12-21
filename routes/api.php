@@ -43,6 +43,7 @@ Route::group([
     ]
 ], function () {
     Route::post('/createMessage', [MessageController::class, 'createMessage']);
+    Route::delete('/deleteMessage/{id}', [MessageController::class, 'deleteMessageById']);
 });
 
 //MEMBERS
