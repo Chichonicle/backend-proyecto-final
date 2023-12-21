@@ -150,4 +150,47 @@ class MessageController extends Controller
             );
         }
     }
+
+    public function updateMessageById(Request $request, $id)
+    {
+        try {
+            $messages = Mensaje::query()->find($id);
+
+            if (!$messages) {
+                return response()->json(
+                    [
+                        "success" => true,
+                        "message" => "Message doesnt exists"
+                    ],
+                    Response::HTTP_BAD_REQUEST
+                );
+            }
+
+            $newMessage = $request->input('message');
+
+            if ($request->has('message')) {
+                $messages->message = $newMessage;
+            }
+
+            $messages->save();
+
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "Message updated"
+                ],
+                Response::HTTP_OK
+            );
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error updating message"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
 }
