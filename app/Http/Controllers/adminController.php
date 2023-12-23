@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Sala;
 use App\Models\Series;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -122,6 +123,56 @@ class adminController extends Controller
                 [
                     "success" => false,
                     "message" => "Error deleting serie"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
+
+    public function getAllSalas(Request $request)
+    {
+        try {
+            $user = auth()->user();
+
+            if ($user->role != "admin") {
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "You are not admin"
+                    ],
+                    Response::HTTP_UNAUTHORIZED
+                );
+            }
+
+            $salas = Sala::query()->get();
+
+            if($salas->isEmpty()){
+                return response()->json(
+                    [
+                        "success" => true,
+                        "message" => "There are not any salas", 
+                    ],
+                    Response::HTTP_OK
+                ); 
+            }
+
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "Salas obtained succesfully",
+                    "data" => $salas
+                ],
+                Response::HTTP_OK
+            );
+
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error obtaining salas",
+                    "data" => $salas
                 ],
                 Response::HTTP_INTERNAL_SERVER_ERROR
             );
