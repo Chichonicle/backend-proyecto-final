@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Sala;
 use App\Models\Series;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
@@ -173,6 +174,56 @@ class adminController extends Controller
                     "success" => false,
                     "message" => "Error obtaining salas",
                     "data" => $salas
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
+
+    public function getAllUsers(Request $request)
+    {
+        try {
+            $user = auth()->user();
+
+            if ($user->role != "admin") {
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "You are not admin"
+                    ],
+                    Response::HTTP_UNAUTHORIZED
+                );
+            }
+
+            $users = User::query()->get();
+
+            if($users->isEmpty()){
+                return response()->json(
+                    [
+                        "success" => true,
+                        "message" => "There are not any user", 
+                    ],
+                    Response::HTTP_OK
+                ); 
+            }
+
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "Users obtained succesfully",
+                    "data" => $users
+                ],
+                Response::HTTP_OK
+            );
+
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error obtaining users",
+                    "data" => $users
                 ],
                 Response::HTTP_INTERNAL_SERVER_ERROR
             );

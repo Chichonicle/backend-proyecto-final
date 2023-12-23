@@ -73,4 +73,5 @@ Route::group([
     Route::post('/serie', [adminController::class, 'createSerie']);
     Route::delete('/serie/{id}', [adminController::class, 'deleteSerie']);
     Route::get('/salas', [adminController::class, 'getAllSalas']);
+    Route::get('/users', [adminController::class, 'getAllUsers']);
 });
