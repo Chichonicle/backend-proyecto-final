@@ -4,23 +4,24 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Sala extends Model
+class Member extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'serie_id',
-        'user_id',
+        "user_id",
+        "salas_id"
     ];
 
-    public function user(): BelongsTo
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
-    public function series(): BelongsTo
+
+    public function salas()
     {
-        return $this->belongsTo(Series::class, 'serie_id');
+        return $this->belongsTo(Sala::class);
     }
 }
+

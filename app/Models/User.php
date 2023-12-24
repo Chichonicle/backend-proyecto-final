@@ -46,7 +46,7 @@ class User extends Authenticatable
     }
     public function series(): HasMany
     {
-        return $this->hasMany(Serie::class);
+        return $this->hasMany(Series::class);
     }
     public function mensajes(): HasMany
     {
@@ -54,7 +54,7 @@ class User extends Authenticatable
     }
     public function comentarios(): BelongsToMany
     {
-        return $this->belongsToMany(sala::class, "mensajes");
+        return $this->belongsToMany(Sala::class, "mensajes");
     }
     
 
