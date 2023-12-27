@@ -6,6 +6,7 @@ use App\Models\Mensaje;
 use App\Models\Sala;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -18,12 +19,25 @@ class MessageController extends Controller
             $userId=auth()->id();
             $salasId = $request->input('salas_id');
             $message = $request->input('message');
+    
+            // Comprueba si el usuario es miembro de la sala
+            $isMember = DB::table('members')->where('user_id', $userId)->where('salas_id', $salasId)->exists();
+            if (!$isMember) {
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "User is not a member of the room"
+                    ],
+                    Response::HTTP_FORBIDDEN
+                );
+            }
+    
             $newMessage = Mensaje::create([
                 "user_id" => $userId,
                 "salas_id" => $salasId,
                 "message" => $message
             ]);
-
+    
             return response()->json(
                 [
                     "success" => true,
@@ -43,10 +57,10 @@ class MessageController extends Controller
                 Response::HTTP_INTERNAL_SERVER_ERROR
             );
         }
-
-
-        return 'Create Message';
     }
+
+
+   
 
     public function deleteMessageById(Request $request, $id)
     {
