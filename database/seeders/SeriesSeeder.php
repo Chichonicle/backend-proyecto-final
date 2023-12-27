@@ -20,8 +20,20 @@ class SeriesSeeder extends Seeder
             "url" => "https://www.youtube.com/watch?v=3HT60PKvrfM",
             "picture" => "https://www.crunchyroll.com/imgsrv/display/thumbnail/480x720/catalog/crunchyroll/35e4ac6339f5fdcc164160a5755790cd.jpe",
 
+            
 
         ]);
+
+        DB::table('series')->insert([
+            "name" => "Los caballeros del zodiaco",
+            "year" => 1986,
+            "genre" => "Anime",
+            "url" => "https://www.youtube.com/watch?v=YemEUSOMong",
+            "picture" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIvxF1E7o9CadsUNuUYY4OZcdiViDbLN65aUGwTQ62FzMqZTahmouDFtcFtyixYLIN9mc&usqp=CAU",
+
+
+        ]);
+        
         DB::table('series')->insert([
             "name" => "Dragones y Mazmorras",
             "year" => 1985,
@@ -67,15 +79,7 @@ class SeriesSeeder extends Seeder
 
 
         ]);
-        DB::table('series')->insert([
-            "name" => "Los caballeros del zodiaco",
-            "year" => 1986,
-            "genre" => "Anime",
-            "url" => "https://www.youtube.com/watch?v=YemEUSOMong",
-            "picture" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIvxF1E7o9CadsUNuUYY4OZcdiViDbLN65aUGwTQ62FzMqZTahmouDFtcFtyixYLIN9mc&usqp=CAU",
-
-
-        ]);
+        
         DB::table('series')->insert([
             "name" => "Oliver y Benji",
             "year" => 1983,
