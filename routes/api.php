@@ -3,6 +3,7 @@
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\SalasController;
 use App\Http\Controllers\SeriesController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -54,16 +55,7 @@ Route::group([
     Route::put('/updateMessage/{id}', [MessageController::class, 'updateMessageById']);
 });
 
-//MEMBERS
-Route::group([
-    "middleware" => [
-        "auth:sanctum"
-    ]
-], function () {
-Route::post('/member', [MemberController::class, 'addUserSalas']);
-Route::post('/member/add', [MemberController::class, 'addMember']);
-Route::delete('/member/{id}', [MemberController::class, 'exitSalaById']);
-});
+
 
 
 //ADMIN
@@ -74,4 +66,14 @@ Route::group([
     Route::delete('/serie/{id}', [adminController::class, 'deleteSerie']);
     Route::get('/salas', [adminController::class, 'getAllSalas']);
     Route::get('/users', [adminController::class, 'getAllUsers']);
+});
+
+//SALAS
+Route::group([
+    'middleware' => ['auth:sanctum']
+], function () {
+    Route::post('/joinSala', [SalasController::class, 'joinSala']);
+    Route::delete('/sala/{serie_id}', [SalasController::class, 'leaveSala']);
+    Route::get('/sala/member/{user_id}/{series_id}', [SalasController::class, 'isUserMemberOfSala']);
+    
 });

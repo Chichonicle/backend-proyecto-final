@@ -6,6 +6,7 @@ use App\Models\Mensaje;
 use App\Models\Sala;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -13,17 +14,40 @@ class MessageController extends Controller
 {
     public function createMessage(Request $request)
     {
+        $request->validate([
+            'series_id' => 'required|string',
+            'message' => 'required|string',
+            'salas_id' => 'required|string',
+        ]);
+        
         Log::info('Create Message');
         try {
             $userId=auth()->id();
-            $salasId = $request->input('salas_id');
+            $seriesId = $request->input('series_id');
             $message = $request->input('message');
+            $salasId = $request->input('salas_id');
+    
+            $isMember = DB::table('salas')
+                ->where('user_id', $userId)
+                ->where('series_id', $seriesId)
+                ->exists();
+
+            if (!$isMember) {
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "User is not a member of the room"
+                    ],
+                    Response::HTTP_FORBIDDEN
+                );
+            }
+    
             $newMessage = Mensaje::create([
                 "user_id" => $userId,
                 "salas_id" => $salasId,
                 "message" => $message
             ]);
-
+    
             return response()->json(
                 [
                     "success" => true,
@@ -43,10 +67,10 @@ class MessageController extends Controller
                 Response::HTTP_INTERNAL_SERVER_ERROR
             );
         }
-
-
-        return 'Create Message';
     }
+
+
+   
 
     public function deleteMessageById(Request $request, $id)
     {

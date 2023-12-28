@@ -11,14 +11,9 @@ class Sala extends Model
     use HasFactory;
 
     protected $fillable = [
-        'serie_id',
-        'user_id',
+        'series_id',
     ];
 
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
     public function series(): BelongsTo
     {
         return $this->belongsTo(Series::class, 'serie_id');

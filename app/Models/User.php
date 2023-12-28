@@ -44,19 +44,15 @@ class User extends Authenticatable
     {
         return $this->hasMany(Sala::class);
     }
-    public function series(): HasMany
-    {
-        return $this->hasMany(Series::class);
-    }
+    
     public function mensajes(): HasMany
     {
         return $this->hasMany(Mensaje::class);
     }
-    public function comentarios(): BelongsToMany
+    
+    public function series(): BelongsToMany
     {
-        return $this->belongsToMany(Sala::class, "mensajes");
+        return $this->belongsToMany(Series::class);
     }
     
-
-
 }

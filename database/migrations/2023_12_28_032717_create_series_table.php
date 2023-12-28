@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('members', function (Blueprint $table) {
+        Schema::create('series', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('salas_id');
-            $table->foreign("user_id")->references("id")->on("users")->constrained()->onDelete('cascade');
-            $table->foreign("salas_id")->references("id")->on("salas")->constrained()->onDelete('cascade');
-            $table->unique(["user_id", "salas_id"]);
+            $table->string('name', 100);
+            $table->string('genre', 50);
+            $table->string('year', 4);
+            $table->string('url', 200);
+            $table->boolean('is_active')->default(true);
+            $table->string('picture', 200);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
@@ -28,6 +29,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('members');
+        Schema::dropIfExists('series');
     }
 };
+
