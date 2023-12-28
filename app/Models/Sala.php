@@ -12,6 +12,7 @@ class Sala extends Model
 
     protected $fillable = [
         'series_id',
+        'name',
     ];
 
     public function series(): BelongsTo
