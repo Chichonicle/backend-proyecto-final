@@ -3,6 +3,7 @@
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\Sala_userController;
 use App\Http\Controllers\SalasController;
 use App\Http\Controllers\SeriesController;
 use App\Http\Controllers\UserController;
@@ -76,4 +77,12 @@ Route::group([
     Route::post('/sala', [SalasController::class, 'createSala']);
     Route::delete('/sala/{serie_id}', [SalasController::class, 'leaveSala']);
     
+});
+
+
+// Sala_user
+Route::group([
+    'middleware' => ['auth:sanctum']
+], function () {
+    Route::get('/sala-user', [Sala_userController::class, 'getSalaUser']);
 });
