@@ -3,6 +3,7 @@
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\SalasController;
 use App\Http\Controllers\SeriesController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -65,4 +66,12 @@ Route::group([
     Route::delete('/serie/{id}', [adminController::class, 'deleteSerie']);
     Route::get('/salas', [adminController::class, 'getAllSalas']);
     Route::get('/users', [adminController::class, 'getAllUsers']);
+});
+
+//SALAS
+Route::group([
+    'middleware' => ['auth:sanctum']
+], function () {
+    Route::post('/joinSala/{serie_id}', [SalasController::class, 'joinSala']);
+    
 });
