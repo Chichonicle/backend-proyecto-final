@@ -14,17 +14,24 @@ class MessageController extends Controller
 {
     public function createMessage(Request $request)
     {
+        $request->validate([
+            'series_id' => 'required|string',
+            'message' => 'required|string',
+            'salas_id' => 'required|string',
+        ]);
+        
         Log::info('Create Message');
         try {
             $userId=auth()->id();
-            $salasId = $request->input('salas_id');
+            $seriesId = $request->input('series_id');
             $message = $request->input('message');
+            $salasId = $request->input('salas_id');
     
-            $isMember = Sala::query()
+            $isMember = DB::table('salas')
                 ->where('user_id', $userId)
-                ->where('series_id', $salasId)
+                ->where('series_id', $seriesId)
                 ->exists();
-                
+
             if (!$isMember) {
                 return response()->json(
                     [

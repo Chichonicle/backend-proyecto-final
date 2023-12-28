@@ -32,7 +32,8 @@ class SalasController extends Controller
             return response()->json(
                 [
                     "success" => false,
-                    "message" => "User is already a member of that sala"
+                    "message" => "User is already a member of that sala",
+                    "data" => $existingMember
                 ],
                 Response::HTTP_BAD_REQUEST
             );
@@ -109,4 +110,28 @@ class SalasController extends Controller
             );
         }
     }
+
+    public function isUserMemberOfSala($user_id, $series_id)
+{
+    $existingMember = Sala::where('user_id', $user_id)->where('series_id', $series_id)->first();
+
+    if ($existingMember) {
+        return response()->json(
+            [
+                "success" => true,
+                "message" => "User is a member of the sala",
+                "data" => $existingMember
+            ],
+            Response::HTTP_OK
+        );
+    } else {
+        return response()->json(
+            [
+                "success" => false,
+                "message" => "User is not a member of the sala",
+            ],
+            Response::HTTP_OK
+        );
+    }
+}
 }

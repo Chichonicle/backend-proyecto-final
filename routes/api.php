@@ -74,5 +74,6 @@ Route::group([
 ], function () {
     Route::post('/joinSala', [SalasController::class, 'joinSala']);
     Route::delete('/sala/{serie_id}', [SalasController::class, 'leaveSala']);
+    Route::get('/sala/member/{user_id}/{series_id}', [SalasController::class, 'isUserMemberOfSala']);
     
 });

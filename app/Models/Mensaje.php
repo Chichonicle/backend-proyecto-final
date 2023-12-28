@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -21,7 +22,7 @@ class Mensaje extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function sala(): HasMany
+    public function salas(): HasMany
     {
         return $this->hasMany(Sala::class);
     }
