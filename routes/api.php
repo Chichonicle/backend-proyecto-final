@@ -72,7 +72,7 @@ Route::group([
 Route::group([
     'middleware' => ['auth:sanctum']
 ], function () {
-    Route::post('/joinSala', [SalasController::class, 'joinSala']);
+    Route::post('/sala', [SalasController::class, 'createSala']);
     Route::delete('/sala/{serie_id}', [SalasController::class, 'leaveSala']);
     Route::get('/sala/member/{user_id}/{series_id}', [SalasController::class, 'isUserMemberOfSala']);
     
