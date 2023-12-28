@@ -72,8 +72,8 @@ Route::group([
 Route::group([
     'middleware' => ['auth:sanctum']
 ], function () {
+    Route::get('/sala/{id}', [SalasController::class, 'getSalaById']);
     Route::post('/sala', [SalasController::class, 'createSala']);
     Route::delete('/sala/{serie_id}', [SalasController::class, 'leaveSala']);
-    Route::get('/sala/member/{user_id}/{series_id}', [SalasController::class, 'isUserMemberOfSala']);
     
 });
