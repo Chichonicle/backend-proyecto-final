@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -20,6 +21,7 @@ class Series extends Model
         'url',
         'is_active',
         'picture',
+
     ];
 
     public function user(): BelongsTo
@@ -30,12 +32,9 @@ class Series extends Model
     {
         return $this->belongsTo(Series::class);
     }
-    public function salas(): HasMany
+    public function salas(): HasOne
     {
-        return $this->hasMany(Sala::class);
+        return $this->hasOne(Sala::class);
     }
-    public function mensajes(): HasMany
-    {
-        return $this->hasMany(Mensaje::class);
-    }
+    
 }

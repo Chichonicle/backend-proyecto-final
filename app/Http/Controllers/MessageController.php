@@ -20,7 +20,6 @@ class MessageController extends Controller
             $salasId = $request->input('salas_id');
             $message = $request->input('message');
     
-            // Comprueba si el usuario es miembro de la sala
             $isMember = DB::table('members')->where('user_id', $userId)->where('salas_id', $salasId)->exists();
             if (!$isMember) {
                 return response()->json(
