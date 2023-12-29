@@ -54,6 +54,7 @@ Route::group([
     Route::get('/message', [MessageController::class, 'getMessage']);
     Route::get('/messages', [MessageController::class, 'getAllMessages']);
     Route::put('/updateMessage/{id}', [MessageController::class, 'updateMessageById']);
+    Route::get('/messagesala', [MessageController::class, 'salaChat']);
 });
 
 
