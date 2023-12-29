@@ -20,5 +20,8 @@ class DatabaseSeeder extends Seeder
          $this->call([
           SeriesSeeder::class,
          ]);
+         $this->call([
+          SalaSeeder::class,
+         ]);
     }
 }
