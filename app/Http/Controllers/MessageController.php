@@ -129,55 +129,59 @@ class MessageController extends Controller
     }
 
     public function getMessage(Request $request)
-    {
-        try {
+{
+    try {
 
-            $user = auth()->user();
-            $sala_id = $request->input('salas_id');
-            $user_sala = Sala::query()->where('user_id', $user->id)->where('series_id', $sala_id)->first();
+        $user = auth()->user();
+        $sala_id = $request->input('salas_id');
+        $user_sala = Sala_user::query()->where('user_id', $user->id)->where('salas_id', $sala_id)->first();
 
-            if (!$user_sala) {
-                return response()->json(
-                    [
-                        "success" => true,
-                        "message" => "You are not a member of this chat"
-                    ],
-                    Response::HTTP_OK
-                );
-            }
-
-            $salaChat = Mensaje::query()->where('salas_id', $sala_id)->get();
-
-            if ($salaChat->isEmpty()) {
-                return response()->json(
-                    [
-                        "success" => true,
-                        "message" => "This chat is void"
-                    ],
-                    Response::HTTP_OK
-                );
-            }
-
+        if (!$user_sala) {
             return response()->json(
                 [
                     "success" => true,
-                    "message" => "Room chat obtained succesfully",
-                    "data" =>  $salaChat
+                    "message" => "You are not a member of this chat"
                 ],
                 Response::HTTP_OK
             );
-        } catch (\Throwable $th) {
-            Log::error($th->getMessage());
-
-            return response()->json(
-                [
-                    "success" => false,
-                    "message" => "Error obtaining a chat room"
-                ],
-                Response::HTTP_INTERNAL_SERVER_ERROR
-            );
         }
+
+        $salaChat = Mensaje::query()
+        ->join('users', 'mensajes.user_id', '=', 'users.id')
+        ->where('salas_id', $sala_id)
+        ->select('mensajes.*', 'users.username')
+        ->get();
+
+    if ($salaChat->isEmpty()) {
+        return response()->json(
+            [
+                "success" => true,
+                "message" => "This chat is void"
+            ],
+            Response::HTTP_OK
+        );
     }
+
+    return response()->json(
+        [
+            "success" => true,
+            "message" => "Room chat obtained succesfully",
+            "data" =>  $salaChat
+        ],
+        Response::HTTP_OK
+    );
+} catch (\Throwable $th) {
+    Log::error($th->getMessage());
+
+    return response()->json(
+        [
+            "success" => false,
+            "message" => "Error obtaining a chat room"
+        ],
+        Response::HTTP_INTERNAL_SERVER_ERROR
+    );
+}
+}
 
     public function updateMessageById(Request $request, $id)
     {

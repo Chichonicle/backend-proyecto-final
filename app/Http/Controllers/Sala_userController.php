@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Sala;
 use App\Models\Sala_user;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -47,59 +48,63 @@ class Sala_userController extends Controller
     }
 
     public function createSalaUser(Request $request)
-    {
-        try {
-            $user_id = $request->input('user_id');
-            $salas_id = $request->input('salas_id');
+{
+    try {
+        $user_id = $request->input('user_id');
+        $salas_id = $request->input('salas_id');
 
-            $user = auth()->user();
-            $sala_user = Sala_user::query()->where('salas_id', $salas_id)->first();
+        $user = auth()->user();
 
-            if (!$sala_user) {
-                return response()->json(
-                    [
-                        "success" => true,
-                        "message" => "This sala does not exist"
-                    ],
-                    Response::HTTP_OK
-                );
-            }
+        $sala_user = Sala_user::firstOrCreate(
+            ['salas_id' => $salas_id, 'user_id' => $user_id]
+        );
 
-            if ($sala_user->user_id != $user->id) {
-                return response()->json(
-                    [
-                        "success" => true,
-                        "message" => "You aren't an owner of this sala"
-                    ],
-                    Response::HTTP_OK
-                );
-            }
-
-            $newMember = Sala_user::create(
-                [
-                    "user_id" => $user_id,
-                    "salas_id" => $salas_id
-                ]
-            );
-
+        if ($sala_user->wasRecentlyCreated) {
             return response()->json(
                 [
                     "success" => true,
-                    "message" => "User member added succesfully",
-                    "data" => $newMember
+                    "message" => "Sala created successfully",
+                    "data" => $sala_user
                 ],
                 Response::HTTP_OK
             );
-        } catch (\Throwable $th) {
-            Log::error($th->getMessage());
+        }
 
+        if ($sala_user->user_id != $user->id) {
             return response()->json(
                 [
-                    "success" => false,
-                    "message" => "Error can't adding a new member to sala "
+                    "success" => true,
+                    "message" => "You aren't an owner of this sala"
                 ],
-                Response::HTTP_INTERNAL_SERVER_ERROR
+                Response::HTTP_OK
             );
         }
+
+        $newMember = Sala_user::create(
+            [
+                "user_id" => $user_id,
+                "salas_id" => $salas_id
+            ]
+        );
+
+        return response()->json(
+            [
+                "success" => true,
+                "message" => "User member added succesfully",
+                "data" => $newMember
+            ],
+            Response::HTTP_OK
+        );
+    } catch (\Throwable $th) {
+        Log::error($th->getMessage());
+
+        return response()->json(
+            [
+                "success" => false,
+                "message" => "Error can't adding a new member to sala "
+            ],
+            Response::HTTP_INTERNAL_SERVER_ERROR
+        );
     }
+}
 }
