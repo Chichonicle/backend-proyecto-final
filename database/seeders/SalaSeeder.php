@@ -19,51 +19,51 @@ class SalaSeeder extends Seeder
 
         ]);
 
-        DB::table('series')->insert([
+        DB::table('salas')->insert([
             "name" => "Los caballeros del zodiaco",
             "series_id" => 2,
 
         ]);
 
-        DB::table('series')->insert([
+        DB::table('salas')->insert([
             "name" => "Dragones y Mazmorras",
             "series_id" => 3,
         ]);
 
 
-        DB::table('series')->insert([
+        DB::table('salas')->insert([
             "name" => "Chicho Terremoto",
             "series_id" => 4,
 
         ]);
 
 
-        DB::table('series')->insert([
+        DB::table('salas')->insert([
             "name" => "Voltron",
             "series_id" => 5,
 
         ]);
 
 
-        DB::table('series')->insert([
+        DB::table('salas')->insert([
             "name" => "He-Man",
             "series_id" => 6,
 
         ]);
 
 
-        DB::table('series')->insert([
+        DB::table('salas')->insert([
             "name" => "Conan el barbaro",
             "series_id" => 7,
 
         ]);
 
-        DB::table('series')->insert([
+        DB::table('salas')->insert([
             "name" => "Oliver y Benji",
             "series_id" => 8,
 
         ]);
-        DB::table('series')->insert([
+        DB::table('salas')->insert([
             "name" => "Los mosqueperros",
             "series_id" => 9,
 
