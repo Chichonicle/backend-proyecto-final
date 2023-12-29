@@ -15,55 +15,42 @@ class MessageController extends Controller
 {
     public function createMessage(Request $request)
     {
-        $request->validate([
-            'series_id' => 'required|string',
-            'message' => 'required|string',
-            'salas_id' => 'required|string',
-        ]);
-        
-        Log::info('Create Message');
         try {
-            $userId=auth()->id();
-            $seriesId = $request->input('series_id');
-            $message = $request->input('message');
-            $salasId = $request->input('salas_id');
-    
-            $isMember = DB::table('salas')
-                ->where('user_id', $userId)
-                ->where('series_id', $seriesId)
-                ->exists();
+            $user = auth()->user();
+            $salas_id = $request->input('salas_id');
+            $sala_user = Sala_user::query()->where('user_id', $user->id)->where('salas_id', $salas_id)->first();
 
-            if (!$isMember) {
+            if (!$sala_user) {
                 return response()->json(
                     [
-                        "success" => false,
-                        "message" => "User is not a member of the room"
+                        "success" => true,
+                        "message" => "You are not a member of this chat"
                     ],
-                    Response::HTTP_FORBIDDEN
+                    Response::HTTP_OK
                 );
             }
-    
-            $newMessage = Mensaje::create([
-                "user_id" => $userId,
-                "salas_id" => $salasId,
-                "message" => $message
+
+            $message = Mensaje::query()->create([
+                'user_id' => $user->id,
+                'salas_id' => $salas_id,
+                'message' => $request->input('message')
             ]);
-    
+
             return response()->json(
                 [
                     "success" => true,
-                    "message" => "Message created",
-                    "data" => $newMessage
+                    "message" => "Message created succesfully",
+                    "data" => $message
                 ],
-                Response::HTTP_CREATED
+                Response::HTTP_OK
             );
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
-            dd($th);
+
             return response()->json(
                 [
                     "success" => false,
-                    "message" => "Error creating message"
+                    "message" => "Error obtaining a chat room"
                 ],
                 Response::HTTP_INTERNAL_SERVER_ERROR
             );
