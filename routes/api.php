@@ -85,4 +85,5 @@ Route::group([
     'middleware' => ['auth:sanctum']
 ], function () {
     Route::get('/sala-user', [Sala_userController::class, 'getSalaUser']);
+    Route::post('/sala-user', [Sala_userController::class, 'createSalaUser']);
 });
