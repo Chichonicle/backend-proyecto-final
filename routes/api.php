@@ -3,6 +3,7 @@
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\Sala_userController;
 use App\Http\Controllers\SalasController;
 use App\Http\Controllers\SeriesController;
 use App\Http\Controllers\UserController;
@@ -49,10 +50,11 @@ Route::group([
     ]
 ], function () {
     Route::post('/createMessage', [MessageController::class, 'createMessage']);
-    Route::delete('/deleteMessage/{id}', [MessageController::class, 'deleteMessageById']);
+    Route::delete('/message', [MessageController::class, 'deleteMessage']);
     Route::get('/message', [MessageController::class, 'getMessage']);
     Route::get('/messages', [MessageController::class, 'getAllMessages']);
     Route::put('/updateMessage/{id}', [MessageController::class, 'updateMessageById']);
+    Route::get('/messagesala', [MessageController::class, 'salaChat']);
 });
 
 
@@ -72,8 +74,17 @@ Route::group([
 Route::group([
     'middleware' => ['auth:sanctum']
 ], function () {
-    Route::post('/joinSala', [SalasController::class, 'joinSala']);
+    Route::get('/sala/{id}', [SalasController::class, 'getSalaById']);
+    Route::post('/sala', [SalasController::class, 'createSala']);
     Route::delete('/sala/{serie_id}', [SalasController::class, 'leaveSala']);
-    Route::get('/sala/member/{user_id}/{series_id}', [SalasController::class, 'isUserMemberOfSala']);
     
+});
+
+
+// Sala_user
+Route::group([
+    'middleware' => ['auth:sanctum']
+], function () {
+    Route::get('/sala-user', [Sala_userController::class, 'getSalaUser']);
+    Route::post('/sala-user', [Sala_userController::class, 'createSalaUser']);
 });

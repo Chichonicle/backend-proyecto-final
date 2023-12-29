@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Mensaje;
 use App\Models\Sala;
+use App\Models\Sala_user;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
@@ -14,74 +15,32 @@ class MessageController extends Controller
 {
     public function createMessage(Request $request)
     {
-        $request->validate([
-            'series_id' => 'required|string',
-            'message' => 'required|string',
-            'salas_id' => 'required|string',
-        ]);
-        
-        Log::info('Create Message');
         try {
-            $userId=auth()->id();
-            $seriesId = $request->input('series_id');
-            $message = $request->input('message');
-            $salasId = $request->input('salas_id');
-    
-            $isMember = DB::table('salas')
-                ->where('user_id', $userId)
-                ->where('series_id', $seriesId)
-                ->exists();
+            $user = auth()->user();
+            $salas_id = $request->input('salas_id');
+            $sala_user = Sala_user::query()->where('user_id', $user->id)->where('salas_id', $salas_id)->first();
 
-            if (!$isMember) {
+            if (!$sala_user) {
                 return response()->json(
                     [
-                        "success" => false,
-                        "message" => "User is not a member of the room"
+                        "success" => true,
+                        "message" => "You are not a member of this chat"
                     ],
-                    Response::HTTP_FORBIDDEN
+                    Response::HTTP_OK
                 );
             }
-    
-            $newMessage = Mensaje::create([
-                "user_id" => $userId,
-                "salas_id" => $salasId,
-                "message" => $message
+
+            $message = Mensaje::query()->create([
+                'user_id' => $user->id,
+                'salas_id' => $salas_id,
+                'message' => $request->input('message')
             ]);
-    
-            return response()->json(
-                [
-                    "success" => true,
-                    "message" => "Message created",
-                    "data" => $newMessage
-                ],
-                Response::HTTP_CREATED
-            );
-        } catch (\Throwable $th) {
-            Log::error($th->getMessage());
-            dd($th);
-            return response()->json(
-                [
-                    "success" => false,
-                    "message" => "Error creating message"
-                ],
-                Response::HTTP_INTERNAL_SERVER_ERROR
-            );
-        }
-    }
-
-
-   
-
-    public function deleteMessageById(Request $request, $id)
-    {
-        try {
-            $deleteMessage = Mensaje::destroy($id);
 
             return response()->json(
                 [
                     "success" => true,
-                    "message" => "Message deleted",
-                    "data" => $deleteMessage
+                    "message" => "Message created succesfully",
+                    "data" => $message
                 ],
                 Response::HTTP_OK
             );
@@ -91,7 +50,52 @@ class MessageController extends Controller
             return response()->json(
                 [
                     "success" => false,
-                    "message" => "Error deleting message"
+                    "message" => "Error obtaining a chat room"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
+
+
+   
+
+    public function deleteMessage(Request $request)
+    {
+        try {
+            $user = auth()->user();
+            $salas_id = $request->input('salas_id');
+            $message = $request->input('message');
+
+            $sala_user = Mensaje::query()->where('user_id', $user->id)->where('salas_id', $salas_id)->where('message', $message)->first();
+
+            if (!$sala_user) {
+                return response()->json(
+                    [
+                        "success" => true,
+                        "message" => "This message does not exist"
+                    ],
+                    Response::HTTP_OK
+                );
+            }
+
+            Mensaje::destroy($sala_user->id);
+
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "Message deleted succesfully",
+                    "data" => $message
+                ],
+                Response::HTTP_OK
+            );
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error obtaining a chat sala"
                 ],
                 Response::HTTP_INTERNAL_SERVER_ERROR
             );
@@ -212,6 +216,57 @@ class MessageController extends Controller
                 [
                     "success" => false,
                     "message" => "Error updating message"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
+
+    public function salaChat(Request $request)
+    {
+        try {
+
+            $user = auth()->user();
+            $salas_id = $request->input('salas_id');
+            $sala_user = Sala_user::query()->where('user_id', $user->id)->where('salas_id', $salas_id)->first();
+
+            if (!$sala_user) {
+                return response()->json(
+                    [
+                        "success" => true,
+                        "message" => "You are not a member of this chat"
+                    ],
+                    Response::HTTP_OK
+                );
+            }
+
+            $salaChat = Mensaje::query()->where('salas_id', $salas_id)->get();
+
+            if ($salaChat->isEmpty()) {
+                return response()->json(
+                    [
+                        "success" => true,
+                        "message" => "This chat is void"
+                    ],
+                    Response::HTTP_OK
+                );
+            }
+
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "Sala chat obtained succesfully",
+                    "data" =>  $salaChat
+                ],
+                Response::HTTP_OK
+            );
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error obtaining a chat sala"
                 ],
                 Response::HTTP_INTERNAL_SERVER_ERROR
             );

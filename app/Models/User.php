@@ -40,19 +40,27 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    public function salas(): HasMany
+    public function series(): HasMany
     {
-        return $this->hasMany(Sala::class);
+        return $this->hasMany(Series::class);
     }
     
-    public function mensajes(): HasMany
+    public function sala_user()
+    {
+        return $this->hasMany(Sala_user::class);
+    }
+    public function salas()
+    {
+        return $this->belongsToMany(Sala::class, 'sala_user', 'user_id', 'salas_id');
+    }
+    public function messageToRoom(): BelongsToMany
+    {
+        return $this->belongsToMany(Sala::class, 'messages');
+    }
+    public function messages()
     {
         return $this->hasMany(Mensaje::class);
     }
     
-    public function series(): BelongsToMany
-    {
-        return $this->belongsToMany(Series::class);
-    }
     
 }

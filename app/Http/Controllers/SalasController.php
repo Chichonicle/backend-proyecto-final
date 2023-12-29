@@ -7,131 +7,96 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator as FacadesValidator;
 use Symfony\Component\HttpFoundation\Response;
 
 class SalasController extends Controller
 {
-    public function joinSala(Request $request)
+    public function createSala(Request $request)
 {
     try {
-        $user = auth::user();
-        if (!$user) {
-            return response()->json(
-                [
-                    "success" => false,
-                    "message" => "Authentication required"
-                ],
-                Response::HTTP_UNAUTHORIZED
-            );
-        }
+        $validator = FacadesValidator::make($request->all(), [
+        'name' => 'required|min:3|max:100',
+        'series_id' => 'required|exists:series,id'
+    ]);
 
-        $series_id = $request->input('series_id');
+    if ($validator->fails()) {
+        return response()->json(
+            [
+                "success" => true,
+                "message" => "Error creating sala",
+                "error" => $validator->errors()
+            ],
+            Response::HTTP_BAD_REQUEST
+        );
+    } 
 
-        $existingMember = Sala::where('user_id', $user->id)->where('series_id', $series_id)->first();
-        if ($existingMember) {
-            return response()->json(
-                [
-                    "success" => false,
-                    "message" => "User is already a member of that sala",
-                    "data" => $existingMember
-                ],
-                Response::HTTP_BAD_REQUEST
-            );
-        }
+    $newSala = Sala::create(
+        [
+            "name" => $request->input('name'),
+            "series_id" => $request->input('series_id')
+        ]
+    );
 
-        $salaMember = Sala::create([
-            'user_id' => $user->id,
-            'series_id' => $series_id,
-        ]);
 
         return response()->json(
             [
                 "success" => true,
-                "message" => "User joined to sala successfully",
-                "data" => $salaMember
+                "message" => "Sala created successfully",
+                "data" => $newSala
             ],
             Response::HTTP_CREATED
         );
     } catch (\Throwable $th) {
         Log::error($th->getMessage());
+
         return response()->json(
             [
                 "success" => false,
-                "message" => "Error joining the sala",
+                "message" => "Error creating sala"
             ],
             Response::HTTP_INTERNAL_SERVER_ERROR
         );
     }
 }
-
-
-    public function leaveSala(Request $request, $series_id)
+public function getSalaById(Request $request, $id)
     {
         try {
-            $user = auth::user();
-            if (!$user) {
-                return response()->json(
-                    [
-                        "success" => false,
-                        "message" => "Authentication required"
-                    ],
-                    Response::HTTP_UNAUTHORIZED
-                );
-            }
+            $sala = Sala::query()->find($id);
 
-            $salasMember = Sala::where('user_id', $user->id)->where('series_id', $series_id)->first();
-
-            if ($salasMember) {
-                $salasMember->delete();
-
+            if (!$sala) {
                 return response()->json(
                     [
                         "success" => true,
-                        "message" => "User left the sala successfully"
+                        "message" => "Sala doesn't exist",
                     ],
                     Response::HTTP_OK
                 );
-            } else {
-                return response()->json(
-                    [
-                        "success" => false,
-                        "message" => "User is not a member of the sala"
-                    ],
-                    Response::HTTP_BAD_REQUEST
-                );
             }
+
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "Sala obtained succesfully",
+                    "data" => $sala
+                ],
+                Response::HTTP_OK
+            );
         } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
             return response()->json(
                 [
                     "success" => false,
-                    "message" => "Error leaving the sala",
+                    "message" => "Error obtaining sala"
                 ],
                 Response::HTTP_INTERNAL_SERVER_ERROR
             );
         }
     }
-
-    public function isUserMemberOfSala($user_id, $series_id)
-{
-    $existingMember = Sala::where('user_id', $user_id)->where('series_id', $series_id)->first();
-
-    if ($existingMember) {
-        return response()->json(
-            [
-                "success" => true,
-                "message" => "User is a member of the sala",
-                "data" => $existingMember
-            ],
-            Response::HTTP_OK
-        );
-    } else {
-        return response()->json(
-            [
-                "success" => false,
-                "message" => "User is not a member of the sala",
-            ],
-            Response::HTTP_OK
-        );
-    }
 }
-}
+
+        
+
+
+  
