@@ -60,16 +60,32 @@ class MessageController extends Controller
 
    
 
-    public function deleteMessageById(Request $request, $id)
+    public function deleteMessage(Request $request)
     {
         try {
-            $deleteMessage = Mensaje::destroy($id);
+            $user = auth()->user();
+            $salas_id = $request->input('salas_id');
+            $message = $request->input('message');
+
+            $sala_user = Mensaje::query()->where('user_id', $user->id)->where('salas_id', $salas_id)->where('message', $message)->first();
+
+            if (!$sala_user) {
+                return response()->json(
+                    [
+                        "success" => true,
+                        "message" => "This message does not exist"
+                    ],
+                    Response::HTTP_OK
+                );
+            }
+
+            Mensaje::destroy($sala_user->id);
 
             return response()->json(
                 [
                     "success" => true,
-                    "message" => "Message deleted",
-                    "data" => $deleteMessage
+                    "message" => "Message deleted succesfully",
+                    "data" => $message
                 ],
                 Response::HTTP_OK
             );
@@ -79,7 +95,7 @@ class MessageController extends Controller
             return response()->json(
                 [
                     "success" => false,
-                    "message" => "Error deleting message"
+                    "message" => "Error obtaining a chat sala"
                 ],
                 Response::HTTP_INTERNAL_SERVER_ERROR
             );
