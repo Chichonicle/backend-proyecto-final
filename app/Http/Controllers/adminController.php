@@ -229,4 +229,41 @@ class adminController extends Controller
             );
         }
     }
+
+    public function deleteUserById(Request $request, $id)
+    {
+        try {
+            $user = User::find($id);
+
+            if (!$user) {
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "User not found"
+                    ],
+                    Response::HTTP_NOT_FOUND
+                );
+            }
+
+            $user->delete();
+
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "User deleted"
+                ],
+                Response::HTTP_OK
+            );
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error deleting User"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
 }

@@ -68,6 +68,7 @@ Route::group([
     Route::delete('/serie/{id}', [adminController::class, 'deleteSerie']);
     Route::get('/salas', [adminController::class, 'getAllSalas']);
     Route::get('/users', [adminController::class, 'getAllUsers']);
+    Route::delete('/users/{id}', [adminController::class, 'deleteUserById']);
 });
 
 //SALAS
