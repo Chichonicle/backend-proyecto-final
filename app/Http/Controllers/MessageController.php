@@ -60,47 +60,53 @@ class MessageController extends Controller
 
    
 
-    public function deleteMessage(Request $request)
-    {
-        try {
-            $user = auth()->user();
-            $salas_id = $request->input('salas_id');
-            $message = $request->input('message');
+    public function deleteMessage($id)
+{
+    try {
+        $user = auth()->user();
 
-            $sala_user = Mensaje::query()->where('user_id', $user->id)->where('salas_id', $salas_id)->where('message', $message)->first();
-
-            if (!$sala_user) {
-                return response()->json(
-                    [
-                        "success" => true,
-                        "message" => "This message does not exist"
-                    ],
-                    Response::HTTP_OK
-                );
-            }
-
-            Mensaje::destroy($sala_user->id);
-
-            return response()->json(
-                [
-                    "success" => true,
-                    "message" => "Message deleted succesfully",
-                    "data" => $message
-                ],
-                Response::HTTP_OK
-            );
-        } catch (\Throwable $th) {
-            Log::error($th->getMessage());
-
+        $sala_user = Mensaje::query()->where('user_id', $user->id)->where('id', $id)->first();
+        if (!$sala_user) {
             return response()->json(
                 [
                     "success" => false,
-                    "message" => "Error obtaining a chat sala"
+                    "message" => "This message does not exist or you do not have permission to delete it"
                 ],
-                Response::HTTP_INTERNAL_SERVER_ERROR
+                Response::HTTP_OK
             );
         }
+
+        if ($sala_user->user_id != $user->id) {
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "You do not have permission to delete this message"
+                ],
+                Response::HTTP_FORBIDDEN
+            );
+        }
+
+        Mensaje::destroy($sala_user->id);
+
+        return response()->json(
+            [
+                "success" => true,
+                "message" => "Message deleted succesfully"
+            ],
+            Response::HTTP_OK
+        );
+    } catch (\Throwable $th) {
+        Log::error($th->getMessage());
+
+        return response()->json(
+            [
+                "success" => false,
+                "message" => "Error deleting the message"
+            ],
+            Response::HTTP_INTERNAL_SERVER_ERROR
+        );
     }
+}
 
     public function getAllMessages(Request $request)
     {

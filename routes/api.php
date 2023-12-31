@@ -50,7 +50,7 @@ Route::group([
     ]
 ], function () {
     Route::post('/createMessage', [MessageController::class, 'createMessage']);
-    Route::delete('/message', [MessageController::class, 'deleteMessage']);
+    Route::delete('/deleteMessage/{id}', [MessageController::class, 'deleteMessage']);
     Route::get('/message', [MessageController::class, 'getMessage']);
     Route::get('/messages', [MessageController::class, 'getAllMessages']);
     Route::put('/updateMessage/{id}', [MessageController::class, 'updateMessageById']);
