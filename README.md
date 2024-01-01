@@ -205,6 +205,11 @@ La plataforma de series es una aplicación web diseñada para facilitar el acces
 </details>
 
 ## Contacto
+
+Para cualquier pregunta o comentario, no dudes en ponerte en contacto:
+
+- **Christian Perez Rodriguez**
+
 <a href = "mailto:christianperez.rbb@gmail.com"><img src="https://img.shields.io/badge/Gmail-C6362C?style=for-the-badge&logo=gmail&logoColor=white" target="_blank"></a>
 <a href="https://www.linkedin.com/in/christian-perez-rodriguez-9b79b8290/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a> 
 <a href="https://github.com/Chichonicle" target="_blank"><img src="https://img.shields.io/badge/github-24292F?style=for-the-badge&logo=github&logoColor=green" target="_blank"></a>
