@@ -50,7 +50,7 @@ Route::group([
     ]
 ], function () {
     Route::post('/createMessage', [MessageController::class, 'createMessage']);
-    Route::delete('/message', [MessageController::class, 'deleteMessage']);
+    Route::delete('/deleteMessage/{id}', [MessageController::class, 'deleteMessage']);
     Route::get('/message', [MessageController::class, 'getMessage']);
     Route::get('/messages', [MessageController::class, 'getAllMessages']);
     Route::put('/updateMessage/{id}', [MessageController::class, 'updateMessageById']);
@@ -68,6 +68,8 @@ Route::group([
     Route::delete('/serie/{id}', [adminController::class, 'deleteSerie']);
     Route::get('/salas', [adminController::class, 'getAllSalas']);
     Route::get('/users', [adminController::class, 'getAllUsers']);
+    Route::delete('/users/{id}', [adminController::class, 'deleteUserById']);
+    Route::delete('/adminMessage/{id}', [adminController::class, 'deleteMessageByAdmin']);
 });
 
 //SALAS

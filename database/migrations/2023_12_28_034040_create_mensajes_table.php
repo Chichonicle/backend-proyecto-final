@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('message', 500);
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('salas_id');
-            $table->foreign('salas_id')->references('id')->on('salas');
+            $table->foreign('salas_id')->references('id')->on('salas')->onDelete('cascade');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
