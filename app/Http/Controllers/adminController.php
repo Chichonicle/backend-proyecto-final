@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Mensaje;
 use App\Models\Sala;
 use App\Models\Series;
 use App\Models\User;
@@ -266,4 +267,52 @@ class adminController extends Controller
             );
         }
     }
+
+    public function deleteMessageByAdmin($id)
+{
+    try {
+        $user = auth()->user();
+
+        $sala_user = Mensaje::query()->where('id', $id)->first();
+        if (!$sala_user) {
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "This message does not exist"
+                ],
+                Response::HTTP_OK
+            );
+        }
+
+        if ($sala_user->user_id != $user->id && $user->role != 'admin') {
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "You do not have permission to delete this message"
+                ],
+                Response::HTTP_FORBIDDEN
+            );
+        }
+
+        Mensaje::destroy($sala_user->id);
+
+        return response()->json(
+            [
+                "success" => true,
+                "message" => "Message deleted succesfully"
+            ],
+            Response::HTTP_OK
+        );
+    } catch (\Throwable $th) {
+        Log::error($th->getMessage());
+
+        return response()->json(
+            [
+                "success" => false,
+                "message" => "Error deleting the message"
+            ],
+            Response::HTTP_INTERNAL_SERVER_ERROR
+        );
+    }
+}
 }

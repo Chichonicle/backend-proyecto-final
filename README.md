@@ -1,66 +1,215 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Proyecto Final
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+## Servicio de series
+
+La plataforma de series es una aplicación web diseñada para facilitar el acceso a series de los años 80 y 90. Dirigida a usuarios que desean recordar una infancia o volver a ver las series que seguramente veiamos de pequeños, la plataforma ofrece una sala de chat donde los usuarios pueden compartir opiniones sobre las series que están viendo o simplemente charlar con gente que comparte tus mismos gustos y así no tener nunca la sensación de estar viendo las series tú solo, aunque nadie las esté viendo contigo en ese momento.
+
+## Tecnologias utilizadas
+
+- Visual Studio Code
+- PHP
+- Laravel
+- Mysql
+
+## Tablas
+
+!['imagen-tabla'](./img/Tablas.png)
+
+## Instalacion en local
+ 
+ 1. Clonamos el repositorio con el comando "$ git clone [URL del repositorio]"
+
+ 2. Instalamos dependencias con el comando "$ npm install"
+
+ 3. Conectamos nuestro repositorio con nuestra base de datos, copiamos los datos del archivo ".env.example" y creamos un archivo llamado ".env" con esos mismos datos pero modificando los valores con las credenciales de nuestra base de datos.
+
+ 4. Ejecutamos las migraciones con el comando "$ npx typeorm-ts-node-commonjs migration:run -d ./src/database.ts"
+
+
+5. Ejecutamos el comando "$ npm run start" para poner en marcha nuestro servidor y nuestra base de datos.
+
+## Endpoints
+<details>
+<summary> Endpoints </summary>
+
+- REGISTER
+
+        POST localhost:8000/api/register
+
+        body:
+            {
+  "name": "Chicho",
+  "surname": "Terremoto",
+  "username": "Chicho",
+  "email": "chicho@gmail.com",
+  "password": "Password1."
+}
+
+- LOGIN
+
+    POST localhost:8000/api/login
+
+    body:
+        {
+  "username": "chichonicle",
+  "password": "Password1."
+}
+
+- PROFILE
+
+    GET localhost:8000/api/profile
+    
+   
+
+- LOGOUT
+    POST localhost:8000/api/logout
+
+
+- UPDATE USER
+
+    PUT localhost:8000/api/update
+
+    body:
+        {
+  "name": "david",
+  "surname": "Ochando",
+  "username": "David86",
+  "email": "david@gmail.com",
+  "password": "Password1."
+}
+
+- GET SERIES
+
+    GET localhost:8000/api/series
+
+- GET SERIE BY ID
+
+    GET localhost:8000/api/serie/1
+
+- CREATE MESSAGE
+
+    POST localhost:8000/api/createMessage
+
+    body:
+    {
+  "salas_id":"1",
+  "message": "Hola a todos"
+}
+
+    GET localhost:8000/api/serie/1
+
+- GET MESSAGES
+
+    GET localhost:8000/api/messages
+
+- GET MESSAGE BY ID
+
+    GET localhost:8000/api/message
+
+    body:
+    {
+  "salas_id": "1"
+}
+
+- UPDATE MESSAGE
+
+    PUT localhost:8000/api/updateMessage/2
+
+    body:
+    {
+  "message":"Mensaje actualizado"
+}
+
+- CREATE SERIE
+
+    POST localhost:8000/api/serie
+
+    body:
+    {
+  "name": "Dragones y Mazmorras",
+  "year": "1986",
+  "genre": "Aventuras",
+  "url": "asdad",
+  "picture": "asdasd"
+}
+(Only admin)
+
+- DELETE SERIE
+
+    DELETE localhost:8000/api/serie/3
+
+    (Only admin)
+
+- GET SALA
+
+    GET localhost:8000/api/salas
+
+
+- GET ALL USERS
+
+    GET localhost:8000/api/users
+
+    (Only admin)
+
+
+- GET SALA MEMBER
+
+    GET localhost:8000/api/sala/member/1/1
+
+
+- CREATE SALA
+
+    POST localhost:8000/api/sala
+
+    body:
+    {
+  "name":"Dragon Ball",
+  "series_id":"1"
+}
+
+- GET SALA BY ID
+
+    GET localhost:8000/api/sala/1
+
+- GET SALA-USER
+
+    GET localhost:8000/api/sala-user
+
+
+- GET MESSAGES OF SALA
+
+    GET localhost:8000/api/messagesala
+
+    body:
+    {
+  "salas_id": 1
+}
+
+- DELETE USER BY ID
+
+    DELETE localhost:8000/api/users/2
+
+    (Only admin)
+
+   
+- DELETE MESSAGE BY ADMIN
+
+    DELETE localhost:8000/api/adminMessage/3
+
+    (Only admin)
+
+- DELETE MESSAGE BY ID
+
+    DELETE localhost:8000/api/deleteMessage/13
+
+</details>
+
+## Contacto
+<a href = "mailto:christianperez.rbb@gmail.com"><img src="https://img.shields.io/badge/Gmail-C6362C?style=for-the-badge&logo=gmail&logoColor=white" target="_blank"></a>
+<a href="https://www.linkedin.com/in/christian-perez-rodriguez-9b79b8290/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a> 
+<a href="https://github.com/Chichonicle" target="_blank"><img src="https://img.shields.io/badge/github-24292F?style=for-the-badge&logo=github&logoColor=green" target="_blank"></a>
 </p>
 
-## About Laravel
+## Agradecimientos
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Agradecimentos a Geeks Hubs Academy, a mis profesores David Ochando y Dani Tarazona por los conocimientos que he podido adquirir a lo largo de todo el bootcamp y que han hecho posible este proyecto.

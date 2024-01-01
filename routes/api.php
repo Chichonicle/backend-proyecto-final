@@ -69,6 +69,7 @@ Route::group([
     Route::get('/salas', [adminController::class, 'getAllSalas']);
     Route::get('/users', [adminController::class, 'getAllUsers']);
     Route::delete('/users/{id}', [adminController::class, 'deleteUserById']);
+    Route::delete('/adminMessage/{id}', [adminController::class, 'deleteMessageByAdmin']);
 });
 
 //SALAS

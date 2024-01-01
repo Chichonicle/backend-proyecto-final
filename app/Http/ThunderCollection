@@ -1,0 +1,493 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Proyecto final",
+    "dateExported": "2024-01-01T04:10:23.174Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "3e164e1f-468b-46ec-99b9-dbacfd424141",
+            "colId": "8c7a009e-687a-4568-8a56-780bebbf7df9",
+            "containerId": "",
+            "name": "localhost:8000/api/register",
+            "url": "localhost:8000/api/register",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-12-11T12:33:30.879Z",
+            "modified": "2023-12-20T18:25:48.771Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Amparo\",\n  \"surname\": \"Sanz\",\n  \"username\": \"Mariam1211\",\n  \"email\": \"mariam1211@gmail.com\",\n  \"password\": \"Password1.\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "2429e472-4549-4939-b983-8f7eb4574827",
+            "colId": "8c7a009e-687a-4568-8a56-780bebbf7df9",
+            "containerId": "",
+            "name": "localhost:8000/api/login",
+            "url": "localhost:8000/api/login",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-12-11T12:50:48.842Z",
+            "modified": "2023-12-31T16:46:47.582Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"username\": \"chichonicle\",\n  \"password\": \"Password1.\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "a16f4995-383f-442a-b938-c292b70f074e",
+            "colId": "8c7a009e-687a-4568-8a56-780bebbf7df9",
+            "containerId": "",
+            "name": "localhost:8000/api/profile",
+            "url": "localhost:8000/api/profile",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2023-12-11T13:05:12.162Z",
+            "modified": "2023-12-28T04:16:43.686Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "2|LrEbjrGlvL66RlOCjQ5BiZWoSmj5afy8LcerD3bw0a9bd6fe"
+            },
+            "tests": []
+        },
+        {
+            "_id": "41cc1eff-bd82-43a1-abb3-c8ac1c967e4f",
+            "colId": "8c7a009e-687a-4568-8a56-780bebbf7df9",
+            "containerId": "",
+            "name": "localhost:8000/api/logout",
+            "url": "localhost:8000/api/logout",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2023-12-11T13:11:27.606Z",
+            "modified": "2023-12-11T13:11:27.606Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "2|X6RShkLQJbOrjjXlG5zxsrjviCSAcsbvwAfj1fEh1a45da9a"
+            },
+            "tests": []
+        },
+        {
+            "_id": "37badb67-226b-41c7-b1de-b2863257bc7b",
+            "colId": "8c7a009e-687a-4568-8a56-780bebbf7df9",
+            "containerId": "",
+            "name": "localhost:8000/api/update",
+            "url": "localhost:8000/api/update",
+            "method": "PUT",
+            "sortNum": 50000,
+            "created": "2023-12-14T17:53:34.557Z",
+            "modified": "2023-12-14T17:53:34.557Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"david\",\n  \"surname\": \"Ochando\",\n  \"username\": \"David86\",\n  \"email\": \"david@gmail.com\",\n  \"password\": \"Password1.\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "10|lvq584MYRM6k5EPYN71ETPMOmtNaA0tneGA6gJMmc33586d3"
+            },
+            "tests": []
+        },
+        {
+            "_id": "c0d3b447-b762-42fa-88ca-b5058b725357",
+            "colId": "8c7a009e-687a-4568-8a56-780bebbf7df9",
+            "containerId": "",
+            "name": "localhost:8000/api/series",
+            "url": "localhost:8000/api/series",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2023-12-16T17:55:28.179Z",
+            "modified": "2023-12-16T17:55:28.179Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "e4f1278b-8a5a-43c5-bf6f-ece09e739441",
+            "colId": "8c7a009e-687a-4568-8a56-780bebbf7df9",
+            "containerId": "",
+            "name": "localhost:8000/api/serie/1",
+            "url": "localhost:8000/api/serie/1",
+            "method": "GET",
+            "sortNum": 70000,
+            "created": "2023-12-16T19:27:38.104Z",
+            "modified": "2023-12-16T19:27:38.104Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "e3bfaac2-57f7-4b5b-a174-fc3be922fd68",
+            "colId": "8c7a009e-687a-4568-8a56-780bebbf7df9",
+            "containerId": "",
+            "name": "localhost:8000/api/createMessage",
+            "url": "localhost:8000/api/createMessage",
+            "method": "POST",
+            "sortNum": 110000,
+            "created": "2023-12-21T03:52:16.305Z",
+            "modified": "2023-12-29T03:51:50.317Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"salas_id\":\"1\",\n  \"message\": \"Hola a todos\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "3|7lAZWSQZ3YnikIn0UTSoJ4CzMv6Yoaj3Ud5iGH5Tdd63bf0a"
+            },
+            "tests": []
+        },
+        {
+            "_id": "165c1bc9-c042-44da-9497-f3b89dc4311d",
+            "colId": "8c7a009e-687a-4568-8a56-780bebbf7df9",
+            "containerId": "",
+            "name": "localhost:8000/api/messages",
+            "url": "localhost:8000/api/messages",
+            "method": "GET",
+            "sortNum": 130000,
+            "created": "2023-12-21T04:00:21.250Z",
+            "modified": "2023-12-21T04:00:21.250Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "2|W03v5TkFBcfSDqknyuDNpksZ5PdMXQZX24AxHK6kf39b2313"
+            },
+            "tests": []
+        },
+        {
+            "_id": "9353d445-f0fa-46c7-8a25-12d826f62c3d",
+            "colId": "8c7a009e-687a-4568-8a56-780bebbf7df9",
+            "containerId": "",
+            "name": "localhost:8000/api/message",
+            "url": "localhost:8000/api/message",
+            "method": "GET",
+            "sortNum": 140000,
+            "created": "2023-12-21T04:15:49.824Z",
+            "modified": "2023-12-21T04:15:49.824Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"salas_id\": \"1\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "2|W03v5TkFBcfSDqknyuDNpksZ5PdMXQZX24AxHK6kf39b2313"
+            },
+            "tests": []
+        },
+        {
+            "_id": "708a060d-e9d8-490a-9ec0-cb6dd0f126c2",
+            "colId": "8c7a009e-687a-4568-8a56-780bebbf7df9",
+            "containerId": "",
+            "name": "localhost:8000/api/updateMessage/2",
+            "url": "localhost:8000/api/updateMessage/2",
+            "method": "PUT",
+            "sortNum": 150000,
+            "created": "2023-12-21T04:21:15.735Z",
+            "modified": "2023-12-21T04:21:15.735Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"message\":\"Mensaje actualizado\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "2|W03v5TkFBcfSDqknyuDNpksZ5PdMXQZX24AxHK6kf39b2313"
+            },
+            "tests": []
+        },
+        {
+            "_id": "6f1cd99e-4107-4562-8cf9-149f483b06a1",
+            "colId": "8c7a009e-687a-4568-8a56-780bebbf7df9",
+            "containerId": "",
+            "name": "localhost:8000/api/serie",
+            "url": "localhost:8000/api/serie",
+            "method": "POST",
+            "sortNum": 160000,
+            "created": "2023-12-21T20:13:28.850Z",
+            "modified": "2023-12-31T16:46:56.220Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Dragones y Mazmorras\",\n  \"year\": \"1986\",\n  \"genre\": \"Aventuras\",\n  \"url\": \"asdad\",\n  \"picture\": \"asdasd\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "76|jBjnt5XmcjFzTEWOwSAGzhTN36Qa7p5nRMC9MVe1d1efae32"
+            },
+            "tests": []
+        },
+        {
+            "_id": "c4290333-e2b8-4bb1-b55e-5b545cc6d3de",
+            "colId": "8c7a009e-687a-4568-8a56-780bebbf7df9",
+            "containerId": "",
+            "name": "localhost:8000/api/serie/3",
+            "url": "localhost:8000/api/serie/3",
+            "method": "DELETE",
+            "sortNum": 170000,
+            "created": "2023-12-21T20:21:05.072Z",
+            "modified": "2023-12-21T20:21:05.072Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "4|POQCneA0LVsfi1IG9ohcKZfYRJMPkXMISOLDa2s252c13ded"
+            },
+            "tests": []
+        },
+        {
+            "_id": "9b54f813-b8cb-4b71-ba6c-d6a9c56637b0",
+            "colId": "8c7a009e-687a-4568-8a56-780bebbf7df9",
+            "containerId": "",
+            "name": "localhost:8000/api/salas",
+            "url": "localhost:8000/api/salas",
+            "method": "GET",
+            "sortNum": 180000,
+            "created": "2023-12-23T19:53:44.291Z",
+            "modified": "2023-12-28T04:18:16.848Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "2|LrEbjrGlvL66RlOCjQ5BiZWoSmj5afy8LcerD3bw0a9bd6fe"
+            },
+            "tests": []
+        },
+        {
+            "_id": "f25135a4-6848-4789-91d9-5000f225e31e",
+            "colId": "8c7a009e-687a-4568-8a56-780bebbf7df9",
+            "containerId": "",
+            "name": "localhost:8000/api/users",
+            "url": "localhost:8000/api/users",
+            "method": "GET",
+            "sortNum": 190000,
+            "created": "2023-12-23T19:56:30.795Z",
+            "modified": "2023-12-23T19:56:30.795Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "5|AqOCth0Nlc3K6EiZoven6H7YnCrOZF9Qfqfrokue672f4061"
+            },
+            "tests": []
+        },
+        {
+            "_id": "13d27921-7b61-4c7e-b2f9-3bf729ccbbf4",
+            "colId": "8c7a009e-687a-4568-8a56-780bebbf7df9",
+            "containerId": "",
+            "name": "localhost:8000/api/sala/2",
+            "url": "localhost:8000/api/sala/10",
+            "method": "DELETE",
+            "sortNum": 210000,
+            "created": "2023-12-28T04:49:08.897Z",
+            "modified": "2023-12-29T03:18:27.342Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "3|7lAZWSQZ3YnikIn0UTSoJ4CzMv6Yoaj3Ud5iGH5Tdd63bf0a"
+            },
+            "tests": []
+        },
+        {
+            "_id": "652df74d-9a70-4500-95f5-a2cad4495ab7",
+            "colId": "8c7a009e-687a-4568-8a56-780bebbf7df9",
+            "containerId": "",
+            "name": "localhost:8000/api/sala/member/1/1",
+            "url": "localhost:8000/api/sala/member/1/1",
+            "method": "GET",
+            "sortNum": 230000,
+            "created": "2023-12-28T19:33:16.986Z",
+            "modified": "2023-12-28T19:33:16.986Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "1|D8kxLNjXEWzbM4zGFzVCF12SBt5GJpZKzd6lvakt2572b43a"
+            },
+            "tests": []
+        },
+        {
+            "_id": "daa9260c-5605-44a5-8c45-24a5c05d28e1",
+            "colId": "8c7a009e-687a-4568-8a56-780bebbf7df9",
+            "containerId": "",
+            "name": "localhost:8000/api/sala",
+            "url": "localhost:8000/api/sala",
+            "method": "POST",
+            "sortNum": 240000,
+            "created": "2023-12-28T23:00:12.101Z",
+            "modified": "2023-12-29T03:16:31.810Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\":\"Dragon Ball\",\n  \"series_id\":\"1\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "3|7lAZWSQZ3YnikIn0UTSoJ4CzMv6Yoaj3Ud5iGH5Tdd63bf0a"
+            },
+            "tests": []
+        },
+        {
+            "_id": "d2e72793-c0e1-4d04-b6b9-e256e942148a",
+            "colId": "8c7a009e-687a-4568-8a56-780bebbf7df9",
+            "containerId": "",
+            "name": "localhost:8000/api/sala/9",
+            "url": "localhost:8000/api/sala/1",
+            "method": "GET",
+            "sortNum": 250000,
+            "created": "2023-12-28T23:05:50.221Z",
+            "modified": "2023-12-29T03:20:05.718Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "3|7lAZWSQZ3YnikIn0UTSoJ4CzMv6Yoaj3Ud5iGH5Tdd63bf0a"
+            },
+            "tests": []
+        },
+        {
+            "_id": "e8698727-7808-4a22-aac5-f7b1943de3fb",
+            "colId": "8c7a009e-687a-4568-8a56-780bebbf7df9",
+            "containerId": "",
+            "name": "localhost:8000/api/sala-user",
+            "url": "localhost:8000/api/sala-user",
+            "method": "GET",
+            "sortNum": 260000,
+            "created": "2023-12-28T23:22:46.723Z",
+            "modified": "2023-12-29T03:20:28.643Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "3|7lAZWSQZ3YnikIn0UTSoJ4CzMv6Yoaj3Ud5iGH5Tdd63bf0a"
+            },
+            "tests": []
+        },
+        {
+            "_id": "bb72bd73-8f7e-48e1-86d3-a290f36b9f8c",
+            "colId": "8c7a009e-687a-4568-8a56-780bebbf7df9",
+            "containerId": "",
+            "name": "localhost:8000/api/sala-user",
+            "url": "localhost:8000/api/sala-user",
+            "method": "POST",
+            "sortNum": 270000,
+            "created": "2023-12-29T02:21:02.136Z",
+            "modified": "2023-12-29T03:47:35.778Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"user_id\": 1,\n  \"salas_id\": 1\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "3|7lAZWSQZ3YnikIn0UTSoJ4CzMv6Yoaj3Ud5iGH5Tdd63bf0a"
+            },
+            "tests": []
+        },
+        {
+            "_id": "1021d49c-b7a4-46e7-bd08-d6693036af88",
+            "colId": "8c7a009e-687a-4568-8a56-780bebbf7df9",
+            "containerId": "",
+            "name": "localhost:8000/api/messagesala",
+            "url": "localhost:8000/api/messagesala",
+            "method": "GET",
+            "sortNum": 280000,
+            "created": "2023-12-29T02:31:15.256Z",
+            "modified": "2023-12-29T02:31:15.256Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"salas_id\": 1\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "2|CT8KUaMYHTnos1wcnow8VLUVtlvAdAj2aX6BgIr0ed0b9f36"
+            },
+            "tests": []
+        },
+        {
+            "_id": "dbe9f22d-9f08-4377-b6a1-19eeb3feb93b",
+            "colId": "8c7a009e-687a-4568-8a56-780bebbf7df9",
+            "containerId": "",
+            "name": "localhost:8000/api/users/2",
+            "url": "localhost:8000/api/users/2",
+            "method": "DELETE",
+            "sortNum": 310000,
+            "created": "2023-12-30T03:24:38.293Z",
+            "modified": "2023-12-30T03:50:04.513Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "2|hSIWJ3fBY5Cyg6dR6dSWLu8xW9xOCz9ZZxiFRXAU35617842"
+            },
+            "tests": []
+        },
+        {
+            "_id": "7e0cccdf-1a0d-4366-9bfa-6530e68959b0",
+            "colId": "8c7a009e-687a-4568-8a56-780bebbf7df9",
+            "containerId": "",
+            "name": "localhost:8000/api/adminMessage/3",
+            "url": "localhost:8000/api/adminMessage/3",
+            "method": "DELETE",
+            "sortNum": 320000,
+            "created": "2023-12-31T10:27:09.569Z",
+            "modified": "2023-12-31T10:27:09.569Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "2|hSIWJ3fBY5Cyg6dR6dSWLu8xW9xOCz9ZZxiFRXAU35617842"
+            },
+            "tests": []
+        },
+        {
+            "_id": "1e7a0be0-e33f-4719-81fa-10435825b163",
+            "colId": "8c7a009e-687a-4568-8a56-780bebbf7df9",
+            "containerId": "",
+            "name": "localhost:8000/api/deleteMessage/13",
+            "url": "localhost:8000/api/deleteMessage/13",
+            "method": "DELETE",
+            "sortNum": 330000,
+            "created": "2023-12-31T10:50:51.289Z",
+            "modified": "2023-12-31T10:50:51.289Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "63|i58eib1vwSQgNLhf8VmmYb1TILjPgPVFanBkC5n469f3d758"
+            },
+            "tests": []
+        }
+    ]
+}
