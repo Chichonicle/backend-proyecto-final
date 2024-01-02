@@ -17,16 +17,20 @@ La plataforma de series es una aplicación web diseñada para facilitar el acces
 
 ## Instalacion en local
  
- 1. Clonamos el repositorio con el comando "$ git clone [URL del repositorio]"
-
- 2. Instalamos dependencias con el comando "$ npm install"
+ 1. Clona este repositorio en tu máquina local usando el siguiente comando: `git clone [URL del repositorio]`.
+ 2. A continuación instala todas las dependencias con el comando ` composer install `.
 
  3. Conectamos nuestro repositorio con nuestra base de datos, copiamos los datos del archivo ".env.example" y creamos un archivo llamado ".env" con esos mismos datos pero modificando los valores con las credenciales de nuestra base de datos.
 
- 4. Ejecutamos las migraciones con el comando "$ npx typeorm-ts-node-commonjs migration:run -d ./src/database.ts"
+ 4. Ejecutamos las migraciones mediante el comando `php artisan migrate`.
 
 
-5. Ejecutamos el comando "$ npm run start" para poner en marcha nuestro servidor y nuestra base de datos.
+ 5. Ejectuamos los seeders mediante el comando `php artisan db:seed` .
+
+ 6. Si estamos en desarrollo, lo hacemos funcionar y actualizarse en tiempo real mediante el comando `php artisan serve`.
+
+ 7. Importar endpoints con Thunder Client.
+
 
 ## Endpoints
 <details>
